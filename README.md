@@ -2,7 +2,6 @@
 
 基于 [PyBullet](https://pybullet.org/) + [OpenAI Gym](https://github.com/openai/gym) + [Stable-Baselines3](https://stable-baselines3.readthedocs.io/) 的无人机自主导航仿真项目。实现了单机导航、多机编队、分阶段训练等功能。
 
-![drone_moving](./drone_moving.gif)
 
 ## 项目特色
 
