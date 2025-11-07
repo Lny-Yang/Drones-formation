@@ -1,0 +1,154 @@
+<?xml version="1.0" ?>
+<!-- 定义一个名为 cf2 的机器人模型 -->
+<robot name="cf2">
+
+  <!-- 定义机器人的自定义物理属性，这些属性并非 URDF 标准的一部分 -->
+  <properties arm="0.0397" kf="3.16e-10" km="7.94e-12" thrust2weight="2.25" max_speed_kmh="30" gnd_eff_coeff="11.36859" prop_radius="2.31348e-2" drag_coeff_xy="9.1785e-7" drag_coeff_z="10.311e-7" dw_coeff_1="2267.18" dw_coeff_2=".16" dw_coeff_3="-.11" />
+
+  <!-- 定义机器人的基础链接，作为其他链接的参考基础 -->
+  <link name="base_link"> 
+
+    <!-- 定义基础链接的惯性属性，包括质心位置、质量和惯性张量 -->
+    <inertial>
+      <!-- 惯性坐标系相对于链接坐标系的位置和姿态，这里无旋转和偏移 -->
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <!-- 基础链接的质量，单位为千克 -->
+      <mass value="0.027"/>
+      <!-- 基础链接的惯性张量，描述链接的转动惯量 -->
+      <inertia ixx="2.3951e-5" ixy="0.0" ixz="0.0" iyy="2.3951e-5" iyz="0.0" izz="3.2347e-5"/>
+    </inertial>
+
+    <!-- 注释掉的参考链接，提供一些相关的论文资料 -->
+    <!-- links>
+      <carlos url="https://arxiv.org/pdf/1608.05786.pdf" />
+      <julian url="http://mikehamer.info/assets/papers/Crazyflie%20Modelling.pdf" />
+      <mit url="http://groups.csail.mit.edu/robotics-center/public_papers/Landry15.pdf" />
+    </links -->
+
+    <!-- 定义基础链接的视觉外观，用于可视化显示 -->
+    <visual>
+      <!-- 视觉模型相对于链接坐标系的位置和姿态，绕 Z 轴旋转 95 度 -->
+      <origin rpy="0 0 95" xyz="0 0 0"/>
+      <!-- 定义视觉模型的几何形状，使用外部的 DAE 格式 3D 模型 -->
+      <geometry>
+        <mesh filename="./cf2.dae" scale=" 1 1 1"/>
+      </geometry> 
+      <!-- 定义视觉模型的材质，使用灰色 -->
+      <material name="grey">
+        <color rgba=".5 .5 .5 1"/>
+      </material> 
+    </visual>
+
+    <!-- 定义基础链接的碰撞形状，用于物理模拟中的碰撞检测 -->
+    <collision>
+      <!-- 碰撞模型相对于链接坐标系的位置和姿态，无旋转和偏移 -->
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <!-- 定义碰撞模型的几何形状为圆柱体 -->
+      <geometry>
+        <cylinder radius=".06" length=".025"/>
+      </geometry>
+    </collision>  
+
+  </link>
+
+  <!-- 定义第一个旋翼链接，位置在基础链接的 X 轴正方向 -->
+  <link name="prop0_link">
+    <!-- 定义旋翼链接的惯性属性，质量和惯性张量设为 0 -->
+    <inertial>
+      <!-- 惯性坐标系相对于链接坐标系的位置和姿态，无旋转，沿 X 轴偏移 0.0397 米 -->
+      <origin rpy="0 0 0" xyz="0.0397 0 0"/>
+      <!-- 旋翼链接的质量设为 0 -->
+      <mass value="0"/>
+      <!-- 旋翼链接的惯性张量设为 0 -->
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <!-- 定义第一个旋翼链接与基础链接之间的固定关节 -->
+  <joint name="prop0_joint" type="fixed">
+    <!-- 指定关节的父链接为基础链接 -->
+    <parent link="base_link"/>
+    <!-- 指定关节的子链接为第一个旋翼链接 -->
+    <child link="prop0_link"/>
+  </joint>
+
+  <!-- 定义第二个旋翼链接，位置在基础链接的 Y 轴正方向 -->
+  <link name="prop1_link">
+    <!-- 定义旋翼链接的惯性属性，质量和惯性张量设为 0 -->
+    <inertial>
+      <!-- 惯性坐标系相对于链接坐标系的位置和姿态，无旋转，沿 Y 轴偏移 0.0397 米 -->
+      <origin rpy="0 0 0" xyz="0 0.0397 0"/>
+      <!-- 旋翼链接的质量设为 0 -->
+      <mass value="0"/>
+      <!-- 旋翼链接的惯性张量设为 0 -->
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <!-- 定义第二个旋翼链接与基础链接之间的固定关节 -->
+  <joint name="prop1_joint" type="fixed">
+    <!-- 指定关节的父链接为基础链接 -->
+    <parent link="base_link"/>
+    <!-- 指定关节的子链接为第二个旋翼链接 -->
+    <child link="prop1_link"/>
+  </joint>
+
+  <!-- 定义第三个旋翼链接，位置在基础链接的 X 轴负方向 -->
+  <link name="prop2_link">
+    <!-- 定义旋翼链接的惯性属性，质量和惯性张量设为 0 -->
+    <inertial>
+      <!-- 惯性坐标系相对于链接坐标系的位置和姿态，无旋转，沿 X 轴负方向偏移 0.0397 米 -->
+      <origin rpy="0 0 0" xyz="-0.0397 0 0"/>
+      <!-- 旋翼链接的质量设为 0 -->
+      <mass value="0"/>
+      <!-- 旋翼链接的惯性张量设为 0 -->
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <!-- 定义第三个旋翼链接与基础链接之间的固定关节 -->
+  <joint name="prop2_joint" type="fixed">
+    <!-- 指定关节的父链接为基础链接 -->
+    <parent link="base_link"/>
+    <!-- 指定关节的子链接为第三个旋翼链接 -->
+    <child link="prop2_link"/>
+  </joint>
+
+  <!-- 定义第四个旋翼链接，位置在基础链接的 Y 轴负方向 -->
+  <link name="prop3_link">
+    <!-- 定义旋翼链接的惯性属性，质量和惯性张量设为 0 -->
+    <inertial>
+      <!-- 惯性坐标系相对于链接坐标系的位置和姿态，无旋转，沿 Y 轴负方向偏移 0.0397 米 -->
+      <origin rpy="0 0 0" xyz="0 -0.0397 0"/>
+      <!-- 旋翼链接的质量设为 0 -->
+      <mass value="0"/>
+      <!-- 旋翼链接的惯性张量设为 0 -->
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <!-- 定义第四个旋翼链接与基础链接之间的固定关节 -->
+  <joint name="prop3_joint" type="fixed">
+    <!-- 指定关节的父链接为基础链接 -->
+    <parent link="base_link"/>
+    <!-- 指定关节的子链接为第四个旋翼链接 -->
+    <child link="prop3_link"/>
+  </joint>
+
+  <!-- 定义质心链接，用于标记无人机的质心位置 -->
+  <link name="center_of_mass_link">
+    <!-- 定义质心链接的惯性属性，质量和惯性张量设为 0 -->
+    <inertial>
+      <!-- 惯性坐标系相对于链接坐标系的位置和姿态，无旋转和偏移 -->
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <!-- 质心链接的质量设为 0 -->
+      <mass value="0"/>
+      <!-- 质心链接的惯性张量设为 0 -->
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <!-- 定义质心链接与基础链接之间的固定关节 -->
+  <joint name="center_of_mass_joint" type="fixed">
+    <!-- 指定关节的父链接为基础链接 -->
+    <parent link="base_link"/>
+    <!-- 指定关节的子链接为质心链接 -->
+    <child link="center_of_mass_link"/>
+  </joint>
+
+</robot>

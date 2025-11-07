@@ -1,0 +1,24 @@
+{
+  "episode_rewards": [
+    -81.58564555403132
+  ],
+  "episode_lengths": [
+    10
+  ],
+  "moving_avg_rewards": [
+    -81.58564555403132
+  ],
+  "success_rate": [
+    0.0
+  ],
+  "success_flags": [
+    false
+  ],
+  "collision_rate": [
+    1.0
+  ],
+  "total_episodes": 1,
+  "final_avg_reward": -81.58564555403132,
+  "final_success_rate": 0.0,
+  "timestamp": "2025-09-25 11:51:34.850084"
+}

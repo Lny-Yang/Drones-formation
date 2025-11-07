@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="indoor_box">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="1 1 2"/>  <!-- 盒子：1x1x2米 -->
+      </geometry>
+      <material name="gray_box">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="1 1 2"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="50.0"/>  <!-- 盒子的质量50kg -->
+      <inertia ixx="2.0" ixy="0.0" ixz="0.0" iyy="2.0" iyz="0.0" izz="2.0"/>
+    </inertial>
+  </link>
+</robot>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="indoor_cylinder">
+  <link name="base_link">
+    <visual>
+      <geometry>
+  <cylinder radius="0.3" length="3"/>  <!-- 圆柱体：半径0.3m，高3m -->
+      </geometry>
+      <material name="gray_cylinder">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+  <cylinder radius="0.3" length="3"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="30.0"/>  <!-- 圆柱体的质量30kg -->
+      <inertia ixx="1.5" ixy="0.0" ixz="0.0" iyy="1.5" iyz="0.0" izz="1.5"/>
+    </inertial>
+  </link>
+</robot>

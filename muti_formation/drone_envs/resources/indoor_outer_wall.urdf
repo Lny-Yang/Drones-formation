@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="indoor_outer_wall">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="30 0.2 3"/>  <!-- 外墙：30m长，0.2m厚，3m高 -->
+      </geometry>
+      <material name="white_wall">
+        <color rgba="0.9 0.9 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="30 0.2 3"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2000.0"/>  <!-- 墙壁质量更大，确保固定不动 -->
+      <inertia ixx="200.0" ixy="0.0" ixz="0.0" iyy="200.0" iyz="0.0" izz="200.0"/>
+    </inertial>
+  </link>
+</robot>

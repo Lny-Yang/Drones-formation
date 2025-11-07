@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot name="building">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="4 4 10"/>  <!-- 默认宽度4m, 深度4m, 高度10m -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="4 4 10"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
